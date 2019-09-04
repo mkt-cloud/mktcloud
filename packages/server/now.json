@@ -1,0 +1,11 @@
+{
+  "alias": "camcloud-server.now.sh",
+  "type": "docker",
+  "public": false,
+  "regions": ["bru"],
+  "build": {
+    "env": {
+      "DB_MONGO": "@db-mongo"
+    }
+  }
+}

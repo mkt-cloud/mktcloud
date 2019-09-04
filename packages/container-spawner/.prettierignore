@@ -1,0 +1,8 @@
+build
+.next
+node_modules
+yarn.lock
+.prettierignore
+.gitignore
+README.md
+dist

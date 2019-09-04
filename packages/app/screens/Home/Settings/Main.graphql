@@ -1,0 +1,13 @@
+query Me {
+  me {
+    _id
+    firstName
+    lastName
+    email
+    plan
+    cameras {
+      _id
+      name
+    }
+  }
+}

@@ -1,0 +1,24 @@
+query AllCameras {
+  me {
+    _id
+    firstName
+    lastName
+    email
+    plan
+    cameras {
+      _id
+      name
+      model
+    }
+  }
+}
+
+query AllCamerasLiveUrl {
+  me {
+    _id
+    cameras {
+      _id
+      liveUrl
+    }
+  }
+}

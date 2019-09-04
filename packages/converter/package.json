@@ -1,0 +1,14 @@
+{
+  "name": "@camcloud/converter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn echo & yarn ffmpeg",
+    "echo": "echo \"ADDRESS: $VIDEO_ADDRESS\"",
+    "ffmpeg": "yarn mkdir && ffmpeg -fflags nobuffer -rtsp_transport tcp -i $VIDEO_ADDRESS -vsync 0 -copyts -vcodec copy -acodec aac -movflags frag_keyframe+empty_moov -an -hls_flags delete_segments+append_list -f segment -segment_list_flags live -segment_time 1 -segment_list_size 3 -segment_format mpegts -segment_list /tmp/stream/$SECRET/index.m3u8 -segment_list_type m3u8 /tmp/stream/$SECRET/%d.ts",
+    "mkdir": "mkdir -p /tmp/stream/$SECRET",
+    "run-docker": "docker run -p 8080:8080 -e \"VIDEO_ADDRESS=$VIDEO_ADDRESS\" -e \"SECRET=$SECRET\" converter",
+    "run-docker-d": "docker run -d -p 8080:8080 -e \"VIDEO_ADDRESS=$VIDEO_ADDRESS\" -e \"SECRET=$SECRET\" converter"
+  }
+}

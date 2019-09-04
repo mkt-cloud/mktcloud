@@ -1,0 +1,53 @@
+{
+  "name": "@camcloud/server",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Janek Rahrt <janek.rahrt@me.com>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --inspect --exec babel-node --watch src ./src/server.js",
+    "build": "babel src -d build --copy-files",
+    "build:prod": "NODE_ENV=\"production\" yarn build",
+    "build:watch": "yarn build --watch",
+    "start": "NODE_ENV=\"production\" node ./build/server.js",
+    "format": "prettier --write --ignore-path .prettierignore \"**/*\"",
+    "lint": "eslint src/**/*.js",
+    "pretest": "yarn format && yarn lint",
+    "test": "echo \"No test defined yet.\"",
+    "unrefer": "yarn rerefer && mkdir .modules && cp -a node_modules/@camcloud .modules/ && yarn add file:./.modules/@camcloud/common/",
+    "rerefer": "yarn add janek26/cam-common && rm -fr .modules",
+    "docker-build": "docker build -t cam-server .",
+    "docker-start": "docker run -p 4000:4000 cam-server",
+    "deploy-dev": "now --public"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "nodemon": "^1.18.6",
+    "prettier": "1.14.3"
+  },
+  "dependencies": {
+    "@camcloud/common": "janek26/cam-common#3f517f1efe3e3a7530ee65612d92bef03c9a59c5",
+    "apollo-errors": "^1.9.0",
+    "apollo-server": "^2.2.0",
+    "aws-sdk": "^2.386.0",
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "braintree": "^2.13.1",
+    "graphql": "^14.0.2",
+    "graphql-yoga": "^1.16.7",
+    "hasha": "^5.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "mailgen": "^2.0.7",
+    "mailgun-js": "^0.22.0",
+    "monk": "^6.0.6",
+    "nanoid": "^2.0.0",
+    "p-queue": "^5.0.0",
+    "signale": "^1.3.0",
+    "xml2js": "^0.4.19"
+  }
+}

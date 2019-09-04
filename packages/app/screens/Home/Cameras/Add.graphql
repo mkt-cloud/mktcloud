@@ -1,0 +1,61 @@
+mutation AddCamera(
+  $name: String!
+  $model: String!
+  $address: String!
+  $http: Int!
+  $rtsp: Int!
+  $usr: String!
+  $pwd: String!
+) {
+  addCamera(
+    name: $name
+    model: $model
+    address: $address
+    http: $http
+    rtsp: $rtsp
+    usr: $usr
+    pwd: $pwd
+  ) {
+    _id
+    name
+    model
+    liveUrl
+  }
+}
+
+mutation EditCamera(
+  $id: ID!
+  $name: String!
+  $model: String!
+  $address: String!
+  $http: Int!
+  $rtsp: Int!
+  $usr: String!
+  $pwd: String!
+) {
+  updateCamera(
+    _id: $id
+    name: $name
+    model: $model
+    address: $address
+    http: $http
+    rtsp: $rtsp
+    usr: $usr
+    pwd: $pwd
+  ) {
+    _id
+    name
+    model
+    address
+    http
+    rtsp
+    usr
+    liveUrl
+  }
+}
+
+mutation RemoveCamera($id: ID!) {
+  removeCamera(_id: $id) {
+    _id
+  }
+}

@@ -1,0 +1,12 @@
+query getCamera($id: ID!) {
+  camera(_id: $id) {
+    _id
+    name
+    model
+    address
+    usr
+    http
+    rtsp
+    liveUrl
+  }
+}

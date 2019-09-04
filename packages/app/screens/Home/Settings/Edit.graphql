@@ -1,0 +1,8 @@
+mutation UpdateMe($firstName: String!, $lastName: String!, $email: String!) {
+  updateMe(firstName: $firstName, lastName: $lastName, email: $email) {
+    _id
+    firstName
+    lastName
+    email
+  }
+}

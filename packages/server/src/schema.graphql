@@ -1,0 +1,201 @@
+type Subscription {
+  camera(events: [DB_EVENT!]!): Camera
+  user(events: [DB_EVENT!]!): User
+  me(events: [DB_EVENT!]!): User
+  refreshedToken: Token
+}
+type Query {
+  # CAMERA
+  cameras: [Camera]
+  camera(_id: ID!): Camera
+  # USER
+  users: [User]
+  user(_id: ID!): User
+  me: User
+  # EVENT
+  event(_id: ID!): Event
+}
+type Mutation {
+  # CAMERA
+  addCamera(
+    name: String!
+    model: String!
+    address: String!
+    http: Int!
+    rtsp: Int
+    usr: String!
+    pwd: String!
+  ): Camera
+  updateCamera(
+    _id: ID!
+    owner: ID
+    name: String
+    model: String
+    address: String
+    http: Int
+    rtsp: Int
+    usr: String
+    pwd: String
+    setMotionDetectConfig: MotionDetectConfigInput
+    ptzMove: PtzMove
+  ): Camera
+  removeCamera(_id: ID!): Camera
+  # USER
+  login(email: String!, password: String!, token: String): Token
+  resetPassword(email: String!): Status
+  setPassword(token: String!, newPassword: String!): User
+  addUser(
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+  ): User
+  updateUser(_id: ID!, firstName: String, lastName: String, email: String): User
+  removeUser(_id: ID!): User
+  updateMe(firstName: String, lastName: String, email: String): User
+  removeMe: User
+  switchPlan(plan: Plan!, nonce: String): User
+  # Token
+  refreshToken: Token
+}
+
+# CONSTS
+enum DB_EVENT {
+  ADDED
+  UPDATED
+  REMOVED
+}
+enum PtzMove {
+  UP
+  DOWN
+  LEFT
+  RIGHT
+  UPLEFT
+  UPRIGHT
+  DOWNLEFT
+  DOWNRIGHT
+  RESET
+}
+enum Status {
+  DEFAULT
+  SUCCESS
+  DELETED
+  ERROR
+}
+enum Plan {
+  PREMIUM
+  FREE
+}
+
+scalar BitMap
+scalar BitMap48
+scalar BitMap10
+
+#TYPES
+type Token {
+  status: Status!
+  token: String
+  owner: User
+}
+input MotionDetectConfigInput {
+  isEnable: Int
+  linkage: BitMap
+  snapInterval: Int
+  sensitivity: Int
+  triggerInterval: Int
+  isMovAlarmEnable: Int
+  isPirAlarmEnable: Int
+  schedule0: BitMap
+  schedule1: BitMap
+  schedule2: BitMap
+  schedule3: BitMap
+  schedule4: BitMap
+  schedule5: BitMap
+  schedule6: BitMap
+  area0: BitMap
+  area1: BitMap
+  area2: BitMap
+  area3: BitMap
+  area4: BitMap
+  area5: BitMap
+  area6: BitMap
+  area7: BitMap
+  area8: BitMap
+  area9: BitMap
+}
+type MotionDetectConfig {
+  result: Int!
+  isEnable: Int
+  linkage: BitMap
+  snapInterval: Int
+  sensitivity: Int
+  triggerInterval: Int
+  schedule0: BitMap48
+  schedule1: BitMap48
+  schedule2: BitMap48
+  schedule3: BitMap48
+  schedule4: BitMap48
+  schedule5: BitMap48
+  schedule6: BitMap48
+  area0: BitMap10
+  area1: BitMap10
+  area2: BitMap10
+  area3: BitMap10
+  area4: BitMap10
+  area5: BitMap10
+  area6: BitMap10
+  area7: BitMap10
+  area8: BitMap10
+  area9: BitMap10
+}
+type Camera {
+  _id: ID!
+  owner: User!
+  name: String
+  model: String
+  address: String
+  usr: String
+  pwd: String
+  http: Int
+  rtsp: Int
+  liveUrl: String
+  timeZone: Int
+  ftpUser: String
+  ftpPass: String
+  status: Status!
+  getMotionDetectConfig: MotionDetectConfig
+  takeSnap: String
+  events(options: EventOptions): EventsPage!
+}
+type User {
+  _id: ID!
+  firstName: String
+  lastName: String
+  email: String!
+  cameras: [Camera]
+  clientToken: String
+  status: Status!
+  plan: Plan!
+  events(options: EventOptions): EventsPage!
+}
+input EventOptions {
+  skip: Int
+  limit: Int
+  type: [String]
+  fromDate: Int
+  toDate: Int
+  device: [String]
+}
+type EventsPage {
+  total: Int!
+  data: [Event!]!
+}
+type Event {
+  _id: ID!
+  path: String
+  date: String!
+  cam: Camera
+  type: String #should be String!
+  owner: User!
+  download: String
+}

@@ -1,0 +1,15 @@
+# An example configuration
+
+region: eu-central-1
+memorySize: 128
+stage: dev
+
+# Both these buckets will be created
+source_bucket: cam-raw
+destination_bucket: cam-converted
+
+# This will transcode video to mp4 web
+ffmpeg_params: '-c:v copy -c:a aac -movflags +faststart'
+
+webhook: 'https://backend.mktcloud.ml/webhooks/camAlarm'
+webhook_secret: 'j3Y60z^0_OVg^m&W3ofS+w@a5L&pa6_-Ux|Z=Pu1f=2Vk*oU4l0_nD9OHtBjTRIqauGXDb6f59I^zPoTurfNZNKqQi*$7X?#qL*54N3jMTORkaUTwuBx^W+0bvFE*=O|p^gt8h6bolSvzZD3R9QN47MWj=@wZE9ATx&DbY@1xLQYE17UAkmtgoOQ@6Vg2mLwsuldaVszfWwjjg+sOs9cQjSAzI9t0XG5f*p-4rmJ@cgoAP_pR+AgRTo#5N85MAn5'

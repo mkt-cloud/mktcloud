@@ -1,0 +1,8 @@
+query getEvent($id: ID!) {
+  event(_id: $id) {
+    _id
+    date
+    type
+    download
+  }
+}

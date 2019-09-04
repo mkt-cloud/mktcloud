@@ -1,0 +1,15 @@
+overwrite: true
+schema: 'https://backend.mktcloud.ml'
+documents: 'screens/**/*.graphql'
+generates:
+  generated/ApolloHooks.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withHOC: false
+      withComponent: false
+      withHooks: true
+      hooksImportFrom: '@apollo/react-hooks'
+      noNamespaces: true

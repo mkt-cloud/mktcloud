@@ -1,0 +1,37 @@
+query AllEvents(
+  $skip: Int!
+  $limit: Int!
+  $device: [String]
+  $type: [String]
+  $fromDate: Int
+  $toDate: Int
+) {
+  me {
+    _id
+    firstName
+    lastName
+    email
+    plan
+    events(
+      options: {
+        skip: $skip
+        limit: $limit
+        device: $device
+        type: $type
+        fromDate: $fromDate
+        toDate: $toDate
+      }
+    ) {
+      total
+      data {
+        _id
+        date
+        type
+        cam {
+          name
+          model
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 const TextInput = styled.TextInput`
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 5px;
+  padding: 40px;
 `
 
 const FieldWrapper = styled.View`

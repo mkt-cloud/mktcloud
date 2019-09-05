@@ -17,7 +17,9 @@ events.createIndex('cam')
 events.createIndex('ftpUser')
 
 export const createEvent = ({ buffer, ...restEvent } = {}) => {
-  const bufferHash = hasha(buffer, { algorithm: 'md5', encoding: 'hex' })
+  const bufferHash = buffer
+    ? hasha(buffer, { algorithm: 'md5', encoding: 'hex' })
+    : null
   return events.insert({ buffer, bufferHash, ...restEvent, date: new Date() })
 }
 

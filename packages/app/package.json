@@ -16,7 +16,7 @@
   "dependencies": {
     "@apollo/react-common": "^3.0.0",
     "@apollo/react-hooks": "^3.0.0",
-    "@camcloud/common": "janek26/cam-common#3f517f1efe3e3a7530ee65612d92bef03c9a59c5",
+    "@camcloud/common": "^1.0.0",
     "@kevinwolf/formal-native": "^0.1.3",
     "apollo-boost": "^0.4.4",
     "date-fns": "^1.30.1",

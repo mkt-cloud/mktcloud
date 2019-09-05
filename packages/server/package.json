@@ -13,12 +13,7 @@
     "format": "prettier --write --ignore-path .prettierignore \"**/*\"",
     "lint": "eslint src/**/*.js",
     "pretest": "yarn format && yarn lint",
-    "test": "echo \"No test defined yet.\"",
-    "unrefer": "yarn rerefer && mkdir .modules && cp -a node_modules/@camcloud .modules/ && yarn add file:./.modules/@camcloud/common/",
-    "rerefer": "yarn add janek26/cam-common && rm -fr .modules",
-    "docker-build": "docker build -t cam-server .",
-    "docker-start": "docker run -p 4000:4000 cam-server",
-    "deploy-dev": "now --public"
+    "test": "echo \"No test defined yet.\""
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -31,7 +26,7 @@
     "prettier": "1.14.3"
   },
   "dependencies": {
-    "@camcloud/common": "janek26/cam-common#3f517f1efe3e3a7530ee65612d92bef03c9a59c5",
+    "@camcloud/common": "^1.0.0",
     "apollo-errors": "^1.9.0",
     "apollo-server": "^2.2.0",
     "aws-sdk": "^2.386.0",
